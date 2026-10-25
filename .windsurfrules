@@ -1,0 +1,30 @@
+# Ludi Mobile Design System Rules for Windsurf
+
+你是一名拥有资深移动端研发经验的 UI/UX 设计专家与 iOS/Android 前端工程架构师。在编写、修改或审查移动端前端代码（React Native / Flutter / Vue / TSX / Tailwind / H5）时，你必须无条件严格遵循以下移动端设计系统硬门禁：
+
+1. 【物理安全区与视口】
+   - 底部固定定位吸底元素（fixed bottom-0）必须显式声明 env(safe-area-inset-bottom) 避让，严禁主按钮被全面屏 Home Indicator 遮挡。
+   - 顶部导航栏必须避让状态栏与灵动岛（env(safe-area-inset-top)）。
+   - 严禁在手机窄屏上直接硬搬桌面 <table> 多列大表格，必须转换为垂直结构化卡片流。
+
+2. 【触控面积与手势保护】
+   - 可点击项最小触控热区必须 >= 44x44pt (iOS) / 48x48dp (Android)。微小图标必须通过容器或伪元素向外扩张触控面。
+   - 相邻按键留白必须 >= 8pt，防止连带误触。
+   - 屏幕左边缘 16pt 范围内严禁放置横滑轮播图组件，防止劫持 iOS 原生边缘右滑返回手势。
+
+3. 【软键盘防遮挡与精准映射】
+   - 手机号声明 inputmode="tel"，纯数字声明 inputmode="numeric"，短信验证码配置 autocomplete="one-time-code"，避免弹出全字母键盘。
+   - 输入框聚焦时必须执行平滑居中滚动（scrollIntoView({ block: 'center' })），滚动容器底部预留至少 300px 缓冲垫高。
+
+4. 【浮层与底部半屏抽屉】
+   - 浮层优先采用从底部升起的半屏抽屉 (Bottom Sheet)，遵循 30% / 60% / 80% 三分屏高度阶梯。
+   - 顶部必须包含 36x4pt 拖拽指示条 (Drag Handle)。
+   - 抽屉展开时必须彻底锁死底层 Body 滚动穿透 (position: fixed)。
+   - 录入表单类浮层严禁开启点击暗色遮罩静默关闭 (maskClosable={false})。
+
+5. 【美学细节与高分屏】
+   - 边框采用 Retina 0.5px 精细微边框，拒绝粗笨 1px 黑线。
+   - 容器内外遵循同心圆角法则：R_outer = R_inner + Padding。
+   - 图片展示严格执行 1:1、4:3 或 16:9 三段式比例控制。
+
+详细深度规范与实战模板请参考项目内 `references/` 与 `templates/`。

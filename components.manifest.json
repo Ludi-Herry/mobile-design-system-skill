@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "mobile-design-system-skill",
+  "version": "1.0.0",
+  "description": "移动端 (iOS/Android) 设计系统、触控物理法则、底部半屏抽屉与高频踩坑避坑机器可读契约",
+  "components": [
+    {
+      "name": "MobileTabBar",
+      "category": "navigation",
+      "layoutRole": "primary-bottom-nav",
+      "useWhen": ["承载 App 3-5 个顶级核心功能页面切换", "常驻单手拇指自然舒适区"],
+      "avoidWhen": ["超过 5 个模块时（改用更多抽屉导航）", "进入二级或三级详情页（必须隐藏 TabBar）"],
+      "doNot": [
+        "严禁缺少底部安全区避让 (env(safe-area-inset-bottom))",
+        "单项触控热区严禁小于 44x44pt",
+        "标签文案严禁超过 4 个汉字"
+      ]
+    },
+    {
+      "name": "BottomSheet",
+      "category": "overlay",
+      "layoutRole": "modal-drawer",
+      "variants": ["low-30", "medium-60", "high-80"],
+      "useWhen": ["商品 SKU 选择", "多条件高级筛选", "快捷评论面板", "次级分支任务录入"],
+      "avoidWhen": ["破坏性二次删除确认（用居中 Alert 对话框）", "轻量即时状态通知（用 Toast）"],
+      "doNot": [
+        "严禁允许滚动穿透至底层 Body 页面",
+        "顶部必须包含 36x4pt 拖拽指示条 (Drag Handle)",
+        "含输入表单时严禁点击暗色遮罩直接静默关闭"
+      ]
+    },
+    {
+      "name": "TouchInput",
+      "category": "primitive",
+      "layoutRole": "form-field",
+      "useWhen": ["手机号、验证码、金额、密码等移动端录入场景"],
+      "avoidWhen": ["桌面宽幅多字段并列表单"],
+      "doNot": [
+        "严禁无脑使用通用 text 键盘，必须精准匹配 inputmode (tel, numeric, email, search)",
+        "严禁输入框被软键盘弹起遮挡，聚焦时必须平滑居中滚动",
+        "底部必须预留键盘缓冲区内边距"
+      ]
+    },
+    {
+      "name": "FeedCard",
+      "category": "composite",
+      "layoutRole": "list-card-item",
+      "useWhen": ["单列或双列瀑布流动态信息展示"],
+      "avoidWhen": ["强对比多字段数据密集表格（移动端严禁硬搬桌面表格）"],
+      "doNot": [
+        "图片展示必须遵循 1:1、4:3 或 16:9 三段式比例控制，严禁原图失真拉伸",
+        "小操作图标必须通过内边距扩展至 44pt 触控面积"
+      ]
+    }
+  ],
+  "pageArchetypes": [
+    "MobileFeedListPage",
+    "MobileMediaDetailPage",
+    "MobileCompactFormWizard",
+    "MobileUserProfilePage"
+  ]
+}
