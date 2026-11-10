@@ -69,9 +69,9 @@ export const MobileTabBarAppShell: React.FC<{ children?: React.ReactNode }> = ({
                 {/* 图标与微小徽标 */}
                 <div className="relative">
                   {tab.icon}
-                  {/* 数字徽标 */}
+                  {/* 数字徽标（向左单向膨胀，>99 收敛） */}
                   {typeof tab.badge === "number" && (
-                    <span className="absolute -top-1 -right-2 px-1 min-w-[14px] h-3.5 rounded-full bg-rose-500 text-white text-[9px] font-bold flex items-center justify-center leading-none">
+                    <span className="absolute -top-1 -right-2 px-1 min-w-[14px] h-3.5 rounded-full bg-rose-500 text-white text-[9px] font-bold flex items-center justify-center tabular-nums">
                       {tab.badge > 99 ? "99+" : tab.badge}
                     </span>
                   )}

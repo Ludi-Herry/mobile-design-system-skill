@@ -68,7 +68,40 @@ def audit_file(file_path: Path):
                 "line": idx,
                 "rule": "移动端暴力移植复杂表格",
                 "severity": "WARNING",
-                "message": "检测到移动端代码直接使用了 <table> 标签。移动端应优先采用垂直结构化卡片流 (Card List) 承载数据，避免整屏横向晃动。",
+                "message": "检测到移动端代码直接使用了 <table> 标签。移动端屏幕极窄，强塞表格会导致整屏横向晃动；必须转换为纵向结构化信息卡片 (Card)。",
+                "code_snippet": line.strip()[:80]
+            })
+
+        # 5. 检查移动端操作按钮写死固定宽度（出海短词膨胀撑爆）
+        if re.search(r'<(?:button|Button)[^>]*?\b(?:w-20|w-16|w-24|w-\[80px\]|w-\[72px\])\b', line, re.IGNORECASE):
+            violations.append({
+                "id": "MOB-005",
+                "line": idx,
+                "rule": "操作按钮写死固定宽度（出海短词膨胀撑爆）",
+                "severity": "WARNING",
+                "message": "检测到移动端按钮写死固定像素宽度。出海多语言短词翻译后长度暴涨 2-3 倍，必须采用大厂百分比切割法或 flex-1 弹性填满自适应。",
+                "code_snippet": line.strip()[:80]
+            })
+
+        # 6. 检查紧缩行高导致多语言变音符号削顶
+        if re.search(r'\b(?:leading-none|line-height:\s*1(?:px|rem|em|;)|\bleading-\[1\])\b', line, re.IGNORECASE):
+            violations.append({
+                "id": "MOB-006",
+                "line": idx,
+                "rule": "紧缩行高导致多语言变音符号削顶",
+                "severity": "WARNING",
+                "message": "检测到 leading-none 极紧缩行高。泰语、越南语、阿拉伯语上下带音标变音符号，过紧行高会被削顶削底，出海多语言行高建议 >= 1.5。",
+                "code_snippet": line.strip()[:80]
+            })
+
+        # 7. 检查常规卡片滥用大阴影（违背页面默认平原则）
+        if re.search(r'<(?:Card|\w+Card)[^>]*?\b(?:shadow-lg|shadow-xl|shadow-2xl)\b', line, re.IGNORECASE):
+            violations.append({
+                "id": "MOB-007",
+                "line": idx,
+                "rule": "常规内容卡片滥用大阴影（违背页面默认平原则）",
+                "severity": "WARNING",
+                "message": "检测到移动端常规卡片使用了大阴影。移动端卡片应默认纯平用 0.5px 微边框切分，大阴影只留给底部弹出抽屉 (BottomSheet)。",
                 "code_snippet": line.strip()[:80]
             })
 

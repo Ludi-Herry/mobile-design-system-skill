@@ -46,6 +46,16 @@ tags: [mobile, ios, android, design-system, touch, safe-area, bottom-sheet]
    - 输入框聚焦时必须执行平滑居中滚动（`scrollIntoView`），滚动容器底部保留充足垫高缓冲。
    - 弹出的半屏抽屉必须锁死底层 Body 滚动，且严禁点击背景遮罩静默关闭表单。
 
+4. **出海多语言与百分比切割法**：
+   - **大厂百分比切割法**：底部操作栏分两截，左侧辅助区预设 5 档固定比例（72%/43%/28%/13%/0%），右侧按钮 `flex: 1` 弹性填满，杜绝写死固定像素宽度被外文长词撑爆；极端超长词压为动词或换通用图标；
+   - **多语言音标防削顶与 RTL 逻辑属性**：泰语/越南语/阿语文本行高 $\ge 1.5$ 且杜绝滥用 `overflow: hidden` 削掉音标声调；阿语界面用 CSS 逻辑属性，但播放进度条、电话号码与数字强制保持 LTR；
+   - **等宽数字与防孤字成行**：金额与倒计时锁死 `tabular-nums` 防抖，卡片标题启用 `text-wrap: balance`。
+
+5. **下沉市场现实主义与动效肉感 (Real-World Pragmatism & Spring Physics)**：
+   - **强光高对比与千元机降级**：户外直射下核心文本对比度 $\ge 4.5:1$（禁用极浅灰字）；低端机禁用大面积毛玻璃高斯模糊与多重复杂 Spring，保证 60fps 硬件加速流畅；弱网离线采用乐观更新与失败 Toast 恢复出口；
+   - **滑动的肉感**：触控 1:1 跟手零延迟，离手释放初速度动量自然衰减，边界回弹具备有质量的弹簧阻尼肉感；
+   - **同心圆角与页面默认平**：嵌套圆角满足 $R_{outer} = R_{inner} + Padding$；卡片一律纯平，大阴影只留给底抽屉 (BottomSheet)；字号严格限定 4 档，全清 eyebrow 悬顶小标签。
+
 ---
 
 ## 深度参考规范库导航 (References Index)
@@ -53,11 +63,11 @@ tags: [mobile, ios, android, design-system, touch, safe-area, bottom-sheet]
 遇到具体移动端设计决策时，精准查阅 `references/` 目录下的专门手册：
 
 - **视口与物理法则**：[01-mobile-foundations-and-viewport.md](./references/01-mobile-foundations-and-viewport.md)
-  - 画布定义、pt/dp/sp 换算、安全区配方、44/48dp 触控热区、Retina 0.5px 微边框、拇指自然舒适区。
+  - 画布定义、pt/dp/sp 换算、安全区配方、44/48dp 触控热区、Retina 0.5px 微边框、下沉市场环境现实主义、同心圆角与去 AI 味纯平规范。
 - **跨平台范式对比**：[02-ios-vs-android-design-paradigms.md](./references/02-ios-vs-android-design-paradigms.md)
   - iOS NavigationBar vs Android TopAppBar、大标题模式折叠、FAB 边界、预测性返回手势、内购与支付合规。
 - **导航与手势系统**：[03-mobile-navigation-and-gestures.md](./references/03-mobile-navigation-and-gestures.md)
-  - 3-5 槽位 TabBar、分段控制器 vs 横滑 Tab、单手操作补偿、多段式手势、橡皮筋阻尼曲线公式。
+  - 3-5 槽位 TabBar、分段控制器 vs 横滑 Tab、触控 1:1 跟手零延迟、离手动量衰减、橡皮筋阻尼曲线公式。
 - **触控输入与软键盘**：[04-touch-inputs-and-soft-keyboard.md](./references/04-touch-inputs-and-soft-keyboard.md)
   - 软键盘顶起防遮挡、6 大输入类型精准映射、三种键盘收起行为、单屏表单轻量化。
 - **浮层系统与底部抽屉**：[05-mobile-overlays-and-bottom-sheet.md](./references/05-mobile-overlays-and-bottom-sheet.md)
@@ -65,7 +75,7 @@ tags: [mobile, ios, android, design-system, touch, safe-area, bottom-sheet]
 - **核心页面原型与信息流**：[06-mobile-archetypes-and-feed-lists.md](./references/06-mobile-archetypes-and-feed-lists.md)
   - 信息流列表下拉刷新与触底加载、虚拟滚动性能、图片 1:1/4:3/16:9 三段式裁切法则、底部全宽 CTA。
 - **踩坑避坑地图与自查清单**：[07-mobile-pitfalls-and-audit-checklist.md](./references/07-mobile-pitfalls-and-audit-checklist.md)
-  - 10 大生产实战踩坑地图、16 项移动端交付硬门禁走查表。
+  - 10 大生产实战踩坑地图、24 项移动端交付硬门禁走查表。
 
 ---
 
