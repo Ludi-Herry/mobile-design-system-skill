@@ -7,7 +7,7 @@ tags: [mobile, ios, android, design-system, touch, safe-area, bottom-sheet]
 
 # 移动端设计系统与跨平台组件规范 AI 执行引擎 (Ludi Mobile Design System Skill)
 
-本 Skill 是面向 AI 编程助手（Agent、Claude Code、Cursor、Windsurf、Codex 等）的可执行移动端设计系统指令层。它彻底终结“AI 写移动端代码直接套用桌面表格、安全区 Home Bar 被遮挡、软键盘弹起遮挡输入框、浮层上下滑动导致底层乱晃”的行业通病，将资深设计师与移动工程架构师的物理约束转化为确定性的生成规则。
+本 Skill 是面向 AI 编程助手（Agent、Claude Code、Cursor、Windsurf、Codex 等）的可执行移动端设计系统指令层。以 **Linear 与 Apple Notes 的极简克制**为准则（简单目的、简单架构、简单设计、简单实现），每个决策必须同时提升 **UX（用户体验）、DX（开发者体验）与 AX（智能体体验）**。
 
 ---
 
@@ -20,13 +20,13 @@ tags: [mobile, ios, android, design-system, touch, safe-area, bottom-sheet]
         │
 [步骤 2: 安全区避让] ──► 顶部状态栏避让 + 底部 Home Indicator 避让 (env(safe-area-inset-*))
         │
-[步骤 3: 架构骨架] ──► 从五大移动端页面骨架精准选型 (Feed / 详情 / 紧凑表单 / 个人中心)
+[步骤 3: 架构骨架] ──► 从五大移动端页面骨架精准选型，删除多余文案让布局自解释 (references/06)
         │
-[步骤 4: 触控与键盘] ──► 锁定 44/48dp 最小热区，精准配置 inputmode 映射与聚焦居中
+[步骤 4: 触控与键盘] ──► 锁定 44/48dp 最小热区，精准配置 inputmode 与按钮 6 态/Loading 防重锁
         │
 [步骤 5: 浮层与手势] ──► 采用底部半屏抽屉 (Bottom Sheet) 三分屏，锁死底层 body 滚动穿透
         │
-[步骤 6: 闭环走查] ──► 运行 16 项移动端交付硬门禁与踩坑自查 (references/07)
+[步骤 6: 闭环走查] ──► 运行 28 项移动端交付硬门禁与踩坑自查 (references/07)
 ```
 
 ---
@@ -56,6 +56,12 @@ tags: [mobile, ios, android, design-system, touch, safe-area, bottom-sheet]
    - **滑动的肉感**：触控 1:1 跟手零延迟，离手释放初速度动量自然衰减，边界回弹具备有质量的弹簧阻尼肉感；
    - **同心圆角与页面默认平**：嵌套圆角满足 $R_{outer} = R_{inner} + Padding$；卡片一律纯平，大阴影只留给底抽屉 (BottomSheet)；字号严格限定 4 档，全清 eyebrow 悬顶小标签。
 
+6. **极简去 AI Slop 五指令、按钮完整态与 AI 协作防稀释（EP21–24）**：
+   - **空间即解释与按频次折叠 UX 文案**：删除多余标语与辅助说明，让布局自体自解释；低频说明按需用 `Tooltip`/`Alert`/折叠抽屉收纳，文案严谨书面化、禁止营销感或轻浮口语；
+   - **全局变量 + 4px 对称网格**：圆角、色彩收敛为全局 Token；间距严格使用 4 的倍数，元素嵌套必要时上下左右四边内边距一致；条件允许时使用连续圆角（Squircle）；
+   - **按钮完整状态与选座视角预览**：确保按压实感、**Loading 转圈并锁死防重复付款**、Focus-visible 聚焦环齐全；选座/订房等空间决策场景提供真实视角即时预览；
+   - **AI 协作防死循环协议（AX）**：外置 Design Token 与现成模板组装，单窗口修改超 5 轮跑偏立即开新窗并只喂最小充分切片。
+
 ---
 
 ## 深度参考规范库导航 (References Index)
@@ -73,9 +79,9 @@ tags: [mobile, ios, android, design-system, touch, safe-area, bottom-sheet]
 - **浮层系统与底部抽屉**：[05-mobile-overlays-and-bottom-sheet.md](./references/05-mobile-overlays-and-bottom-sheet.md)
   - 底部动作表单 (ActionSheet)、三分屏抽屉 (30%/60%/80%)、Body 滚动穿透彻底锁死、点击穿透防范。
 - **核心页面原型与信息流**：[06-mobile-archetypes-and-feed-lists.md](./references/06-mobile-archetypes-and-feed-lists.md)
-  - 信息流列表下拉刷新与触底加载、虚拟滚动性能、图片 1:1/4:3/16:9 三段式裁切法则、底部全宽 CTA。
+  - 信息流列表下拉刷新与触底加载、虚拟滚动性能、图片 1:1/4:3/16:9 三段式裁切法则、选座真实视角预览 (EP23)。
 - **踩坑避坑地图与自查清单**：[07-mobile-pitfalls-and-audit-checklist.md](./references/07-mobile-pitfalls-and-audit-checklist.md)
-  - 10 大生产实战踩坑地图、24 项移动端交付硬门禁走查表。
+  - 10 大生产实战踩坑地图、28 项移动端交付硬门禁走查表。
 
 ---
 

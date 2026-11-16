@@ -61,6 +61,11 @@
 - **RTL 阿语镜像与 LTR 强制特例**：使用 CSS 逻辑属性，但视频进度条、电话号码、纯数字强制保持 LTR；
 - **等宽数字 (`tabular-nums`)** 与 **标题防孤字 (`text-wrap: balance`)**。
 
+### 7. 去 AI Slop 极简哲学、按钮完整态与视角预览 (EP20–EP24)
+- **Linear / Apple Notes 极简准则 & UX/DX/AX 协同**：简单目的与实现；移除冗余标语、营销/口语化 UX 文案，低频说明按需用 `Tooltip`/`Alert` 收纳，让布局自体自解释；
+- **Design Token 与 4px 对称间距**：全局圆角变量 + 连续圆角（Squircle）+ 4px 栅格与嵌套对称内边距；
+- **按钮 Loading 防重锁与选座真实预览**：按钮必须完整覆盖按下物理实感、Loading 转圈锁死防重复付款与键盘聚焦环；选座/订房等空间决策场景提供所见即所得真实视角即时预览。
+
 ---
 
 ## 仓库结构 (Repository Structure)

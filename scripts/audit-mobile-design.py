@@ -105,6 +105,17 @@ def audit_file(file_path: Path):
                 "code_snippet": line.strip()[:80]
             })
 
+        # 8. 检查裸写 outline-none 且缺失键盘聚焦环（无障碍与外接键盘聚焦态）
+        if re.search(r'<(?:button|Button|a|input|select)[^>]*?\b(?:outline-none|focus:outline-none)\b(?![^>]*?\b(?:focus-visible:ring|focus:ring)\b)', line, re.IGNORECASE):
+            violations.append({
+                "id": "MOB-008",
+                "line": idx,
+                "rule": "裸写 outline-none 且缺失键盘聚焦外框（违反按钮完整态与 WCAG）",
+                "severity": "WARNING",
+                "message": "检测到清除了默认 outline 但未补充 focus-visible:ring 聚焦环。外接键盘与无障碍导航用户将丢失焦点位置。",
+                "code_snippet": line.strip()[:80]
+            })
+
     return violations
 
 def main():
